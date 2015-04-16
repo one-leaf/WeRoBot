@@ -76,6 +76,20 @@ class VoiceMessage(WeChatMessage):
         super(VoiceMessage, self).__init__(message)
 
 
+@handle_for_type("video")
+class VideoMessage(WeChatMessage):
+    def __init__(self, message):
+        self.media_id = message.pop('MediaId')
+        self.thumb_media_id = message.pop('ThumbMediaId')
+        super(VideoMessage, self).__init__(message)
+
+@handle_for_type("shortvideo")
+class ShortVideoMessage(WeChatMessage):
+    def __init__(self, message):
+        self.media_id = message.pop('MediaId')
+        self.thumb_media_id = message.pop('ThumbMediaId')
+        super(ShortVideoMessage, self).__init__(message)
+
 class UnknownMessage(WeChatMessage):
     def __init__(self, message):
         self.type = 'unknown'
