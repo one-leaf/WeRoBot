@@ -26,7 +26,7 @@ _DEFAULT_CONFIG = dict(
 
 class BaseRoBot(object):
     message_types = ['subscribe', 'unsubscribe', 'click',  'view',  # event
-                     'text', 'image', 'link', 'location', 'voice']
+                     'text', 'image', 'link', 'location', 'voice', 'video','shortvideo']
 
     token = ConfigAttribute("TOKEN")
     session_storage = ConfigAttribute("SESSION_STORAGE")
@@ -92,6 +92,20 @@ class BaseRoBot(object):
         Decorator to add a handler function for ``voice`` messages
         """
         self.add_handler(f, type='voice')
+        return f
+
+    def video(self, f):
+        """
+        Decorator to add a handler function for ``video`` messages
+        """
+        self.add_handler(f, type='video')
+        return f
+
+    def shortvideo(self, f):
+        """
+        Decorator to add a handler function for ``shortvideo`` messages
+        """
+        self.add_handler(f, type='shortvideo')
         return f
 
     def subscribe(self, f):
